@@ -1,28 +1,57 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+const Login = () => import('views/login/Login.vue') //登录
+const Home = () => import('views/home/Home.vue') //首页
+const Users = () => import('views/home/users/Users') //用户列表
+const Roles = () => import('views/home/rules/Roles') //权限管理
+const Rights = () => import('views/home/rules/Rights') //权限列表
+const Goods = () => import('views/home/product/Goods.vue') //商品管理
+const Params = () => import('views/home/product/Params.vue') //分类列表
+const Categories = () => import('views/home/product/Categories.vue') //商品分类
+const Orders = () => import('../views/home/order/Orders.vue') //订单列表
+const Reports = () => import('../views/home/information/Reports.vue') //数据报表
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 Vue.use(VueRouter)
 
-  const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
+const routes = [{
+    path: '/login',
+    component: Login,
+    name: Login
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/home',
+    component: Home,
+    name: Home,
+    redirect: '/users',
+    children: [{
+        path: '/users',
+        component: Users,
+        name: Users
+      },
+      {
+        path: '/roles',
+        component: Roles,
+        name: Roles
+      },
+      {
+        path: '/rights',
+        component: Rights,
+        name: Rights
+      }
+    ]
+  },
+  {
+    path: '/',
+    redirect: '/login'
   }
 ]
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
   routes
 })
 

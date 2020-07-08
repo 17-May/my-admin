@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 const Login = () => import('views/login/Login.vue') //登录
 const Home = () => import('views/home/Home.vue') //首页
 const Users = () => import('views/home/users/Users') //用户列表
-const Roles = () => import('views/home/rules/Roles') //权限管理
-const Rights = () => import('views/home/rules/Rights') //权限列表
+const RightsList = () => import('views/home/roles/RightsList') //权限列表
+const RolesList = () => import('views/home/roles/RolesList') //角色列表
 const Goods = () => import('views/home/product/Goods.vue') //商品管理
 const Params = () => import('views/home/product/Params.vue') //分类列表
 const Categories = () => import('views/home/product/Categories.vue') //商品分类
@@ -33,14 +33,13 @@ const routes = [{
         name: Users
       },
       {
-        path: '/roles',
-        component: Roles,
-        name: Roles
-      },
-      {
         path: '/rights',
-        component: Rights,
-        name: Rights
+        component: RightsList,
+        name: RightsList
+      }, {
+        path: '/roles',
+        component: RolesList,
+        name: RolesList
       }
     ]
   },

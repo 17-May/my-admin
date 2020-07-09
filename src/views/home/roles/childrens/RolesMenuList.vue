@@ -34,7 +34,7 @@ import { regDelRights } from "network/api";
 export default {
   name: "RolesMenuList",
   props: {
-    rolesList: {
+    rightsList: {
       type: Object
     }
   },
@@ -44,12 +44,12 @@ export default {
     };
   },
   created() {
-    this.rightsInfo = this.rolesList.children;
+    this.rightsInfo = this.rightsList.children;
   },
   methods: {
     //删除指定权限
     del(id) {
-      const roleId = this.rolesList.id;
+      const roleId = this.rightsList.id;
       this.$confirm("此操作将取消该权限, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",

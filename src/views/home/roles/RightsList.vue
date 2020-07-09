@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     async getRightsList() {
-      const result = await reqRights();
+      const result = await reqRights("list");
       if (result.meta.status !== 200)
         return this.$message.error(result.meta.msg);
       this.rightsList = result.data;

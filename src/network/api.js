@@ -65,9 +65,9 @@ export const reqAllotRole = (id, rid) => request({
     }
 })
 
-//权限列表
-export const reqRights = () => request({
-    url: 'rights/list',
+//所有权限列表
+export const reqRights = (type) => request({
+    url: `rights/${type}`,
     method: 'get'
 })
 //删除指定权限
@@ -80,4 +80,28 @@ export const regAddRole = (data) => request({
     url: 'roles',
     method: 'post',
     data
+})
+//根据id查询角色 roles/:id
+export const regSearchRole = (id) => request({
+    url: `roles/${id}`,
+    method: 'get',
+})
+//编辑角色 
+export const regEditRole = (id, data) => request({
+    url: `roles/${id}`,
+    method: 'put',
+    data
+})
+//删除角色 roles/:id
+export const regDelRole = (id) => request({
+    url: `roles/${id}`,
+    method: 'delete',
+})
+//分配角色权限 roles/:roleId/rights
+export const regAllotRole = (roleId, rids) => request({
+    url: `roles/${roleId}/rights`,
+    method: 'post',
+    data: {
+        rids
+    }
 })
